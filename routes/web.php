@@ -17,24 +17,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
- Route::get('/', function () {
-     return view('welcome');
- });
-
-Route::controller(PruebaController::class)->group(function(){
-    Route::get('/prueba2/{name}', 'index');
-});
-
-Route::resource('/prueba2', Prueba2Controller::class);
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\ForumController::class, 'index'])->name('index');
 
-Route::get('/forums', [App\Http\Controllers\ForumController::class, 'index'])->name('index');
+//Route::get('/forums', [App\Http\Controllers\ForumController::class, 'index'])->name('index');
 
-Route::resource('/forums',ForumController::class);
+Route::resource('forums',ForumController::class);
 
 Route::resource('posts', PostController::class);
 
