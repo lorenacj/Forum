@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\App;
 
 class Post extends Model
 {
@@ -29,4 +30,15 @@ class Post extends Model
     public function replies(): HasMany{
       return $this->hasMany(Reply::class);
       }      
+
+      protected static function boot() {
+        parent::boot();
+
+        
+        static::creating(function($post) {
+          if( ! App::runningInConsole() ) {
+            $post->user_id = auth()->id();
+          }
+        });
+    }
 }
