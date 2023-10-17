@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,4 +30,5 @@ Route::resource('forums',ForumController::class);
 
 Route::resource('posts', PostController::class);
 
+Route::resource('replys', ReplyController::class);
 //Route::post('/forums', 'ForumController@store');

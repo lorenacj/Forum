@@ -36,6 +36,29 @@
                 {{ $replies->links() }}
             @endif
 
+            @Logged()
+            <h3 class="text-muted">{{ __("Añadir un nueva respuesta al post :name", ['name' => $post->name]) }}</h3>
+            @include('partials.errors')
+            <form method="POST" action="../replys">
+                {{ csrf_field() }}
+                <input type="hidden" name="post_id" value="{{ $post->id }}"/>
+
+                <div class="form-group">
+                    <label for="title" class="col-md-12 control-label">{{ __("Título") }}</label>
+                    <input id="title" class="form-control" name="title" value="{{ old('title') }}"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-md-12 control-label">{{ __("Descripción") }}</label>
+                    <textarea id="description" class="form-control"
+                              name="description">{{ old('description') }}</textarea>
+                </div>
+
+                 <button type="submit" name="addReply" class="btn btn-default">{{ __("Añadir reply") }}</button>
+            </form>
+            @else
+                @include('partials.login_link', ['message' => __('Inicia sesión para crear una respuesta')])
+            @endLogged
         </div>
     </div>
 @endsection
