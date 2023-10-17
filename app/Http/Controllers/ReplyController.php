@@ -6,6 +6,7 @@ use App\Models\Reply;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReplyRequest;
+use App\Rules\ValidReply;
 
 class ReplyController extends Controller
 {
@@ -28,9 +29,10 @@ class ReplyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ReplyRequest $reply_request) {
-        Reply::create($reply_request->input()); // Esto coge todos los datos que vienen vía Post y los inserta
-        return back()->with('message', ['success', __('Reply creada correctamente')]);
+    public function store(Request $request) {
+        $this->validate(request(), [
+            'reply' => ['required', new ValidReply]
+        ]);
     }
 
     /**

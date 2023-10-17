@@ -27,8 +27,6 @@ Route::get('/', [App\Http\Controllers\ForumController::class, 'index'])->name('i
 //Route::get('/forums', [App\Http\Controllers\ForumController::class, 'index'])->name('index');
 
 Route::resource('forums',ForumController::class);
-
 Route::resource('posts', PostController::class);
-
-Route::resource('replys', ReplyController::class);
+Route::resource('replies', ReplyController::class);
 //Route::post('/forums', 'ForumController@store');
