@@ -26,6 +26,18 @@
                     <div class="panel-body">
                         {{ $post->description }}
                     </div>
+                    @if ($post->isOwner())
+                        <div class="panel-footer">
+                            <form method="POST" action="../posts/{{ $post->id }}">
+                                 {{-- Es necesario enmascarar el método Delete en Laravel --}}
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button type="submit" name="deletePost" class="btn btn-danger">
+                                    {{ __('Eliminar post') }}
+                                </button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             @empty
                 <div class="alert alert-danger">

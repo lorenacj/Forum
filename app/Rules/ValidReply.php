@@ -12,10 +12,15 @@ class ValidReply implements ValidationRule
      *
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
-    public function validate(string $attribute, mixed $value, Closure $fail): boolean
-    {
-        return strlen($value) > 10 && strlen($value) < 500;
-    }
+    public function validate(string $attribute, mixed $value, Closure $fail): void
+    {   
+        //
+     }
+    
+    public function passes($attribute, $value)
+   	{
+        	    return strlen($value) > 10 && strlen($value) < 500;
+    	}
 
     public function message()
     	{
