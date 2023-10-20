@@ -44,7 +44,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts (): HasMany {
-        return $this->hasMany(Post::class); //or cada post ira buscando por cada id de forum todos los posts en ese foro
-        }
+    public function posts(): HasMany {
+        return $this->hasMany(Post::class);
+    }
 }

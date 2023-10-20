@@ -12,7 +12,8 @@ class ForumController extends Controller
      */
     public function index()
     {
-        $forums = Forum::with(['posts','replies'])->paginate(2); //busca en Forum, los ultimos que por fecha son los ultimos y los pagina en 5
+        $forums = Forum::with(['posts', 'replies'])->paginate(2);
+        // dd($forums);
         return view('foros.index', compact('forums'));
     }
 
@@ -30,16 +31,16 @@ class ForumController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name' => 'required|max:100|unique:forums', // forums es la tabla dónde debe ser único
+            'name' => 'required|maxn:100|unique:forums', // forums es la tabla dónde debe ser único
             'description' => 'required|max:500',
         ],
         [
-            'name.required' => __("El campo NAME es requerido")
-        ]
-        );
-        //Forum::create($request()->all());
+            'name.required' => __("El campo NAME es requerido!!!")
+        ]);
+
         Forum::create(request()->all());
-        return back()->with('message',['success', __("Foro creado correctamente")]);
+
+        return back()->with('message', ['success', __("Foro creado correctamente")]);
     }
 
     /**
@@ -47,11 +48,9 @@ class ForumController extends Controller
      */
     public function show(Forum $forum)
     {
-        //Post::Where('forum_id', '=', $forum);
-        //SELECT * FROM post WHERE forum_id=$forum;
-        //$forums = Forum::with(['replies', 'posts'])->paginate(2);
-        $posts = $forum->posts()->with(['owner'])->paginate(2); //Nos muestra los foros, del foro ese y el usuario de ese post y los pagina
-        return view('foros.detail', compact('forum','posts')); 
+        $posts = $forum->posts()->with(['owner'])->paginate(2);
+
+        return view('foros.detail', compact('forum', 'posts'));
     }
 
     /**

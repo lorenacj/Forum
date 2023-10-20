@@ -4,8 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use function Laravel\Prompts\text;
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Reply>
  */
@@ -19,9 +17,9 @@ class ReplyFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => \App\Models\User::all()->random()->id,
             'post_id' => \App\Models\Post::all()->random()->id,
-            'user_id' =>  \App\Models\User::all()->random()->id,
-            'reply' =>  fake()->sentence(),
+            'reply' => fake()->paragraph,
         ];
     }
 }

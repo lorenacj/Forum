@@ -14,12 +14,12 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/sass/style.scss'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/sass/style.scss'])
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container" style="padding-bottom: 100px">
+            <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -72,8 +72,7 @@
             </div>
         </nav>
 
-        <div class="container">
-
+        <div class="container" style="padding-bottom:100px">
             @if(session('message'))
                 <div class="alert alert-{{ session('message')[0] }}">
                     {{ session('message')[1] }}
@@ -82,7 +81,6 @@
 
             @yield('content')
         </div>
-        
     </div>
 </body>
 </html>
