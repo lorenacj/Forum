@@ -14,8 +14,7 @@ class ForumController extends Controller
     {
         $forums = Forum::with(['posts', 'replies'])->paginate(2);
         // dd($forums);
-        return view('foros.index', compact('forums'));
-    }
+        return view('foros.index', compact('forums'));}
 
     /**
      * Show the form for creating a new resource.
@@ -30,18 +29,19 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'name' => 'required|maxn:100|unique:forums', // forums es la tabla dónde debe ser único
+        $this->validate($request, [
+            'name' => 'required|max:100|unique:forums', // forums es la tabla donde debe ser único
             'description' => 'required|max:500',
         ],
         [
-            'name.required' => __("El campo NAME es requerido!!!")
+            'name.required' => __("¡El campo NAME es requerido!")
         ]);
-
         Forum::create(request()->all());
 
         return back()->with('message', ['success', __("Foro creado correctamente")]);
     }
+    
+
 
     /**
      * Display the specified resource.
